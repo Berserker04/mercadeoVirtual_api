@@ -38,6 +38,7 @@ const login = async (data) => {
 };
 
 const validateToken = async (token) => {
+  if (!token) return false;
   let usuario = null;
   token = token.split(" ")[1];
   jwt.verify(token, process.env.SEED, (err, decoded) => {
@@ -47,7 +48,6 @@ const validateToken = async (token) => {
   });
 
   if (!usuario) return false;
-
   var Today = Math.round(new Date().getTime() / 1000);
 
   const { exp } = usuario;

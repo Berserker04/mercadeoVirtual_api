@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const response = require("../../../network/response");
 
 const validateToken = async (req, res, next) => {
-  const RESPONSE = () => response.error(req, res, 200, "No autorizado");
   let token = req.headers.authorization;
 
   if (!token) return response.error(req, res, 200, "No autorizado");

@@ -5,8 +5,8 @@ const add = async (user) => {
   return await newUser.save({ new: true });
 };
 
-const get = async (filter = {}) => {
-  return await User.find(filter, [
+const get = async (filter) => {
+  return await User.find({...filter}, [
     "user_name",
     "email",
     "user_id",

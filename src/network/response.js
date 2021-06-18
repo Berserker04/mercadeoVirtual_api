@@ -5,21 +5,21 @@ const status = {
     500: "Error server"
 }
 
-const success = (req, res, statusCode, msg, data) => {
+const success = (req, res, statusCode, msg, body) => {
     res.status(statusCode).json({
         ok: true,
         message: msg,
         statusMessage: status[statusCode],
-        data
+        body
     })
 }
 
-const error = (req, res, statusCode, msg, data) => {
+const error = (req, res, statusCode, msg, body) => {
     res.status(statusCode).json({
         ok: false,
         message: msg,
         statusMessage: status[statusCode],
-        data
+        body
     })
 }
 

@@ -14,18 +14,23 @@ const register = async (data) => {
 
   user.password = bcrypt.hashSync(user.password, 10);
 
-  user.role_id = user.role ? user.role_id : "60cbf252a38acb24e4ebde16";
+  user.role_id = user.role_id ? user.role_id : "60cbf252a38acb24e4ebde16";
 
-  user = {
-    ...user,
-    user_id: null,
-    person_id: person._id,
-    permits: {
+  let permits = user.permits;
+
+  if (!permits) {
+    permits = {
       edit: true,
       delete: true,
       hide: true,
       publish: true,
-    },
+    };
+  }
+
+  user = {
+    ...user,
+    person_id: person._id,
+    permits,
     state: "active",
   };
 
