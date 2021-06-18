@@ -2,10 +2,11 @@ const express = require("express");
 
 const response = require("../../network/response");
 const controller = require("./controller");
+const validateToken = require("../auth/middlewares/valitadeteToken");
 
 const route = express();
 
-route.post("/", async (req, res) => {
+route.post("/", (req, res) => {
   controller
     .register(req.body)
     .then((result) => {
@@ -18,7 +19,7 @@ route.post("/", async (req, res) => {
     });
 });
 
-route.get("/", (req, res) => {
+route.get("/", validateToken, (req, res) => {
   if (!req.headers.user_id)
     return response.error(req, res, 403, "No autorizado");
   let filter = {
@@ -36,7 +37,7 @@ route.get("/", (req, res) => {
     });
 });
 
-route.get("/id/:user_id", (req, res) => {
+route.get("/id/:user_id", validateToken, (req, res) => {
   controller
     .search({ ...req.params })
     .then((result) => {
@@ -48,7 +49,7 @@ route.get("/id/:user_id", (req, res) => {
     });
 });
 
-route.patch("/:_id", (req, res) => {
+route.patch("/:_id", validateToken, (req, res) => {
   let filter = {
     user_id: req.headers.superuser_id,
     ...req.params,
@@ -71,7 +72,7 @@ route.patch("/:_id", (req, res) => {
     });
 });
 
-route.put("/:_id", async (req, res) => {
+route.put("/:_id", validateToken, (req, res) => {
   controller
     .update(req.params._id, req.body)
     .then((result) => {

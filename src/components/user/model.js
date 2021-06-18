@@ -28,11 +28,11 @@ const users = new Schema({
     ref: "people",
     required: true,
   },
-  //   role_id: {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "roles",
-  //     required: true,
-  //   },
+  role_id: {
+    type: Schema.Types.ObjectId,
+    ref: "roles",
+    required: true,
+  },
   state: {
     type: String,
     required: true,

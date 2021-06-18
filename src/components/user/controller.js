@@ -14,6 +14,8 @@ const register = async (data) => {
 
   user.password = bcrypt.hashSync(user.password, 10);
 
+  user.role_id = user.role ? user.role_id : "60cbf252a38acb24e4ebde16";
+
   user = {
     ...user,
     user_id: null,
@@ -24,14 +26,13 @@ const register = async (data) => {
       hide: true,
       publish: true,
     },
-    role: person._id,
     state: "active",
   };
 
   return await store
     .add(user)
     .then((result) => {
-      result.password = "";
+      user.password = undefined;
       return result;
     })
     .catch((e) => false);
@@ -55,7 +56,6 @@ const update = async (user_id, data) => {
   await storePerson.edit({ _id: person._id }, person).catch((e) => false);
 
   user.password = bcrypt.hashSync(user.password, 10);
-  user.role = user.role ? user.role : "60cbf252a38acb24e4ebde16";
 
   return await store
     .edit({ _id: user_id }, user)

@@ -4,8 +4,10 @@ const people = require("../components/people/network");
 const role = require("../components/role/network");
 const publication = require("../components/publication/network");
 const report = require("../components/report/network");
+const auth = require("../components/auth/network");
 
 const routes = (app) => {
+  app.use("/login", auth);
   app.use("/user", user);
   app.use("/people", people);
   app.use("/role", role);

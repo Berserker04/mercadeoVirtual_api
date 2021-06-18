@@ -15,7 +15,7 @@ const success = (req, res, statusCode, msg, data) => {
 }
 
 const error = (req, res, statusCode, msg, data) => {
-    res.status(statusCode).json(statusCode, {
+    res.status(statusCode).json({
         ok: false,
         message: msg,
         statusMessage: status[statusCode],

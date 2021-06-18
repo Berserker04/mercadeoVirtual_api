@@ -1,12 +1,12 @@
 
-const register = () => {
-    return "Hola"
-}
+// const register = () => {
+//     return "Hola"
+// }
 
 
 
 
 
-module.exports = {
-    register
-}
+// module.exports = {
+//     register
+// }

@@ -2,10 +2,11 @@ const express = require("express");
 
 const response = require("../../network/response");
 const controller = require("./controller");
+const validateToken = require("../auth/middlewares/valitadeteToken");
 
 const route = express();
 
-route.post("/", async (req, res) => {
+route.post("/", validateToken, (req, res) => {
   let { user_id } = req.headers;
   controller
     .register(user_id, req.body)
@@ -19,7 +20,7 @@ route.post("/", async (req, res) => {
     });
 });
 
-route.get("/", (req, res) => {
+route.get("/", validateToken, (req, res) => {
   let filter = {
     user_id: req.headers.user_id,
     ...req.query,
@@ -35,7 +36,7 @@ route.get("/", (req, res) => {
     });
 });
 
-route.put("/:_id", async (req, res) => {
+route.put("/:_id", validateToken, (req, res) => {
   controller
     .update(req.params._id, req.body)
     .then((result) => {
@@ -48,7 +49,7 @@ route.put("/:_id", async (req, res) => {
     });
 });
 
-route.delete("/:_id", async (req, res) => {
+route.delete("/:_id", validateToken, (req, res) => {
   controller
     .remove(req.params._id)
     .then((result) => {
