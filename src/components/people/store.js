@@ -5,9 +5,8 @@ const add = async (person) => {
   return await newPerson.save({ new: true });
 };
 
-const edit = async (person) => {
-  let newPerson = new Person(person);
-  return await newPerson.save({ new: true });
+const edit = async (filter = {}, data = {}) => {
+  return await Person.updateOne(filter, data);
 };
 
 module.exports = {

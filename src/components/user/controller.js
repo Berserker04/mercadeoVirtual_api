@@ -14,7 +14,7 @@ const register = async (data) => {
 
   user.password = bcrypt.hashSync(user.password, 10);
 
-  user.password = user = {
+  user = {
     ...user,
     user_id: null,
     person_id: person._id,
@@ -45,31 +45,20 @@ const changeState = async (filter, data) => {
   return await store.edit(filter, data).catch((e) => false);
 };
 
-const update = async (filter, data) => {
+const update = async (user_id, data) => {
   let { user, ...person } = data;
 
   if (!user || !person) {
     return false;
   }
 
-  await storePerson.edit(person._id, person).catch((e) => false);
+  await storePerson.edit({ _id: person._id }, person).catch((e) => false);
 
   user.password = bcrypt.hashSync(user.password, 10);
-
-  user.password = user = {
-    ...user,
-    permits: {
-      edit: true,
-      delete: true,
-      hide: true,
-      publish: true,
-    },
-    role: person._id,
-    state: "active",
-  };
+  user.role = user.role ? user.role : "60cbf252a38acb24e4ebde16";
 
   return await store
-    .add(user)
+    .edit({ _id: user_id }, user)
     .then((result) => {
       result.password = "";
       return result;
@@ -81,5 +70,5 @@ module.exports = {
   register,
   search,
   changeState,
-  update
+  update,
 };
