@@ -27,7 +27,7 @@ route.get("/", (req, res) => {
   controller
     .search(filter)
     .then((result) => {
-      response.success(req, res, 200, "Publicaciones registrados", result);
+      response.success(req, res, 200, "Reportes registrados", result);
     })
     .catch((error) => {
       console.error(error);
