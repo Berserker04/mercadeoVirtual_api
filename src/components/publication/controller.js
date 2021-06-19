@@ -19,7 +19,6 @@ const update = async (publication_id, data) => {
   if (!data) {
     return false;
   }
-
   return await store
     .edit(publication_id, data)
     .then((result) => result)

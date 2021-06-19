@@ -4,7 +4,7 @@ const response = require("../../../network/response");
 const validateToken = async (req, res, next) => {
   let token = req.headers.authorization;
 
-  if (!token) return response.error(req, res, 200, "No autorizado");
+  if (!token) return response.error(req, res, 401, "No autorizado");
 
   let user = null;
   token = token.split(" ")[1];
@@ -13,7 +13,7 @@ const validateToken = async (req, res, next) => {
     if (!err) user = decoded;
   });
 
-  if (!user) return response.error(req, res, 200, "No autorizado");
+  if (!user) return response.error(req, res, 401, "No autorizado");
 
   let Today = Math.round(new Date().getTime() / 1000);
 
@@ -21,7 +21,7 @@ const validateToken = async (req, res, next) => {
 
   if (Today < exp) return next();
 
-  return response.error(req, res, 200, "No autorizado");
+  return response.error(req, res, 401, "No autorizado");
 };
 
 module.exports = validateToken;

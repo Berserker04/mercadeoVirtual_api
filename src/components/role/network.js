@@ -54,7 +54,7 @@ route.delete("/:_id", validateToken, (req, res) => {
     .remove(req.params._id)
     .then((result) => {
       if (!result) return response.error(req, res, 200, "Revisa los datos.");
-      response.success(req, res, 200, "Eliminación exíta.");
+      response.success(req, res, 200, "Eliminación exítosa.");
     })
     .catch((error) => {
       console.error(error);

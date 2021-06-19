@@ -1,6 +1,7 @@
 const status = {
     200: "Done",
     201: "Created",
+    401: "Not authorized",
     404: "Not found",
     500: "Error server"
 }

@@ -5,9 +5,11 @@ const store = require("./store");
 
 const login = async (data) => {
   let { password, user_name } = data;
+  // password = bcrypt.hashSync(password, 10)
+  // console.log(password);
 
   let users = await store.get(user_name).catch((e) => false);
-
+  
   if (users) {
     if (!(users.length > 0)) {
       return false;

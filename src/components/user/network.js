@@ -37,7 +37,7 @@ route.get("/", validateToken, (req, res) => {
     });
 });
 
-route.get("/id/:user_id", validateToken, (req, res) => {
+route.get("/id/:_id", validateToken, (req, res) => {
   controller
     .search({ ...req.params })
     .then((result) => {

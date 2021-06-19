@@ -22,7 +22,7 @@ route.post("/", validateToken, (req, res) => {
 
 route.get("/", validateToken, (req, res) => {
   let filter = {
-    user_id: req.headers.user_id,
+    super_user: req.headers.super_user,
     ...req.query,
   };
   controller
@@ -54,7 +54,7 @@ route.delete("/:_id", validateToken, (req, res) => {
     .remove(req.params._id)
     .then((result) => {
       if (!result) return response.error(req, res, 200, "Revisa los datos.");
-      response.success(req, res, 200, "Eliminación exíta.");
+      response.success(req, res, 200, "Eliminación exítosa.");
     })
     .catch((error) => {
       console.error(error);

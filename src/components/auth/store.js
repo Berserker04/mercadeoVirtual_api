@@ -7,7 +7,7 @@ const add = async (role) => {
 
 const get = async (user_name = {}) => {
   return await User.find({
-    $or: [{ email: user_name }, { user_name }],
+    $and: [{ state: "active" }, { $or: [{ email: user_name }, { user_name }] }],
   }).populate("role_id", ["name"]);
 };
 

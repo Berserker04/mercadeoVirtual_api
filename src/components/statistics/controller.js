@@ -1,7 +1,6 @@
 const store = require("./store");
 
 const searchUser = async (super_user) => {
-  console.log(super_user);
   return 1 + (await store.getUser({ user_id: super_user }).catch((e) => false));
 };
 

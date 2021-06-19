@@ -48,7 +48,7 @@ const search = async (filter) => {
 };
 
 const changeState = async (filter, data) => {
-  return await store.edit(filter, data).catch((e) => false);
+  return await store.edit({ _id: filter._id }, data).catch((e) => false);
 };
 
 const update = async (user_id, data) => {
@@ -60,8 +60,7 @@ const update = async (user_id, data) => {
 
   await storePerson.edit({ _id: person._id }, person).catch((e) => false);
 
-  user.password = bcrypt.hashSync(user.password, 10);
-
+  if (user.password) user.password = bcrypt.hashSync(user.password, 10);
   return await store
     .edit({ _id: user_id }, user)
     .then((result) => {
